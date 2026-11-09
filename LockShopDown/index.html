@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LockShopDown</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+<main id="app">
+  <button class="mute" data-act="mute" title="Ligar/desligar som" aria-label="Som">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="x" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+
+  <!-- TÍTULO -->
+  <section id="scr-title" class="screen active">
+    <canvas id="titleCv" class="bg-cv" width="960" height="540"></canvas>
+    <div class="title-ui">
+      <div class="neon-sub">LockShop Center apresenta</div>
+      <h1 class="logo">LOCK<span>SHOP</span>DOWN</h1>
+      <p class="tagline">Liquidação Final. Tudo deve sair. Inclusive você.</p>
+      <div class="row center"><button class="btn big" data-go="intro">Bater o ponto</button><button class="btn big ghost" data-act="extras" data-from="title">Extras</button></div>
+      <p class="small">Saque · racionamento · paranoia · <span id="titleProg"></span></p>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section id="scr-intro" class="screen">
+    <div class="intro">
+      <canvas id="introCv" width="960" height="420"></canvas>
+      <div class="intro-box">
+        <span id="introStep" class="kicker"></span>
+        <p id="introText"></p>
+        <div class="row end"><button class="btn ghost" data-act="introSkip">Pular</button><button class="btn" data-act="introNext">Continuar</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESCOLHA -->
+  <section id="scr-select" class="screen">
+    <div class="select">
+      <div class="kicker">Sexta-feira, 21h47</div>
+      <h2>Quem bate o ponto hoje?</h2>
+      <div id="setupBar" class="setup"></div>
+      <div id="protoList" class="proto-list"></div>
+      <div class="how">
+        <div><b>Fase 1 · O saque.</b> De 2 a 4 minutos, conforme a dificuldade (pulada no modo Direto pro Depósito). Revistar prateleiras, pegar o que couber nos 4 espaços, resgatar quem estiver pelo caminho e voltar ao depósito antes das portas fecharem. Algumas lojas fecham antes.</div>
+        <div><b>Fase 2 · O depósito.</b> Racionar, investigar quem bate na porta, mandar expedições e descobrir quem está infectado antes que seja tarde.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASE 1 -->
+  <section id="scr-run" class="screen">
+    <div class="run">
+      <div class="hud-top">
+        <div class="clock"><small>Portas fecham em</small><span id="hudTimer">3:00</span></div>
+        <div class="pa"><span class="pa-tag"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 10v4h4l5 4V6L7 10z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 7a7 7 0 0 1 0 10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><span id="paText">...</span></div>
+        <div class="mini-wrap"><span>Mapa</span><canvas id="minimap" width="208" height="128"></canvas></div>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="cv" width="960" height="600"></canvas>
+        <div id="scavToast" class="toast"></div>
+        <div class="touch-btns"><button id="btnSprint" data-act="sprint">Correr</button><button data-act="use">Revistar</button></div>
+      </div>
+      <div class="hud-bot">
+        <div class="hb-left"><div id="hudSlots" class="slots"></div><div class="stam-row"><span>Fôlego</span><div class="stam"><i id="hudStam"></i></div></div></div>
+        <div id="hudStash" class="stash"></div>
+        <div class="hb-right">
+          <button class="btn ghost" id="btnSkip" data-act="skipRun" title="Volta ao depósito com o que estiver carregando e encerra a exploração">Pular exploração</button>
+          <button class="btn" id="btnClose" data-act="closeDoor" disabled>Baixar a porta agora</button>
+        </div>
+      </div>
+      <div class="keys"><kbd>WASD</kbd> andar · <kbd>Shift</kbd> correr · <kbd>E</kbd> revistar · <kbd>Enter</kbd> baixar a porta · ou clique no mapa · dá pra pular a exploração quando quiser</div>
+    </div>
+  </section>
+
+  <!-- FASE 2 -->
+  <section id="scr-shelter" class="screen">
+    <div class="shelter">
+      <div class="scene-col">
+        <div class="scene-head">
+          <div class="dayplate"><b id="hudDay">Dia 1</b><span id="hudWeek">Sexta</span></div>
+          <div id="hudRescue" class="rescue"></div>
+        </div>
+        <canvas id="room" width="960" height="540"></canvas>
+        <p class="scene-tip">Clique nas pessoas para examinar · na porta para espiar · na estante, no quadro e no rádio para abrir o diário.</p>
+      </div>
+      <div class="journal">
+        <div id="jTabs" class="jtabs"></div>
+        <div class="jbook"><div id="jPage" class="jpage"></div></div>
+        <button id="btnSleep" class="btn sleep" data-act="sleep">Dormir</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIM -->
+  <section id="scr-end" class="screen">
+    <div class="end">
+      <canvas id="endCv" width="960" height="380"></canvas>
+      <div class="end-body">
+        <div id="endKicker" class="kicker"></div>
+        <h2 id="endTitle" class="end-title"></h2>
+        <div id="endStars"></div>
+        <p id="endText" class="end-text"></p>
+        <div id="endStats"></div>
+        <div class="row center"><button class="btn big" data-go="select">Jogar de novo</button><button class="btn ghost" data-act="extras" data-from="end">Conquistas e arquivos</button><button class="btn ghost" data-go="title">Menu</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS -->
+  <section id="scr-extras" class="screen">
+    <div class="extras">
+      <div class="ex-head"><div><div class="kicker">LockShop Center · Achados e Perdidos</div><h2>Extras</h2></div><button class="btn ghost" data-act="exBack">Voltar</button></div>
+      <div id="exTabs" class="extabs"></div>
+      <div id="exBody" class="ex-body"></div>
+    </div>
+  </section>
+
+  <div id="cut" class="cut">
+    <canvas id="cutCv"></canvas>
+    <div class="cut-bar top"></div><div class="cut-bar bot"></div>
+    <div class="cut-tag" id="cutTag"></div>
+    <div class="cut-cap"><p id="cutText"></p><span class="cut-hint">clique para continuar</span></div>
+    <button class="cut-skip" data-act="cutSkip">Pular</button>
+  </div>
+  <div id="achToast" class="ach-toast"></div>
+  <div id="modal" class="modal"><div id="modalCard" class="modal-card"></div></div>
+</main>
+<script src="js/core.js?v=9"></script>
+<script src="js/art.js?v=9"></script>
+<script src="js/data.js?v=9"></script>
+<script src="js/progress.js?v=9"></script>
+<script src="js/scavenge.js?v=9"></script>
+<script src="js/shelter.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
+<script src="js/cutscene.js?v=9"></script>
+</body>
+</html>

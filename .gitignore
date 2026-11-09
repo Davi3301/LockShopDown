@@ -1,0 +1,7 @@
+# saídas do build (o ZIP vai como Release, não no repositório)
+LockShopDown-PC/
+LockShopDown-PC.zip
+launcher/LockShopDown.exe
+
+# configuração local do editor
+.claude/

@@ -1,0 +1,35 @@
+=====================================================
+  LOCKSHOPDOWN
+  Liquidação Final. Tudo deve sair. Inclusive você.
+=====================================================
+
+COMO JOGAR
+1. Extraia o ZIP inteiro numa pasta (botão direito > Extrair tudo).
+   Não jogue de dentro do ZIP.
+2. Dê dois cliques em LockShopDown.exe.
+3. Pronto. O jogo abre numa janela própria e funciona sem internet.
+
+O WINDOWS AVISOU "O Windows protegeu o computador"?
+Isso acontece com qualquer programa novo que não foi comprado
+numa loja. Clique em "Mais informações" e depois em
+"Executar assim mesmo".
+
+DICAS
+- F11 deixa em tela cheia.
+- Use fone: o jogo tem sons e música.
+- Seu progresso (conquistas, finais, documentos) fica salvo
+  neste computador, mesmo fechando o jogo.
+
+NÃO ABRIU?
+O jogo usa o Microsoft Edge, que já vem no Windows 10 e 11.
+Se não tiver Edge nem Chrome, abra o arquivo game\index.html
+em qualquer navegador moderno. Funciona igual.
+
+REQUISITOS
+Windows 10 ou 11. Mouse e teclado (ou tela de toque).
+
+CRÉDITOS
+Jogo feito em HTML, CSS e JavaScript.
+Fontes: Bungee, Courier Prime, Inter, Patrick Hand e
+Permanent Marker, todas sob a licença SIL Open Font License
+(scripts.sil.org/OFL), distribuídas livremente com o jogo.
