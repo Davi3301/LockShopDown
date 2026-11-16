@@ -237,10 +237,10 @@ const CUTS = {
     draw(c, W, H, t, d) {
       cRoom(c, W, H, .78);
       const oth = charsOf(d);
-      oth.forEach((m, i) => { const awake = t > 3; drawChar(c, W * .18 + i * 150, H * .9, 1.9, m.look, { t, pose: awake ? 'hug' : 'lie', expr: awake ? 'scared' : 'sleep', sweat: awake }); });
+      oth.forEach((m, i) => { const awake = t > 3; drawChar(c, W * .12 + i * Math.min(170, W * .14), awake ? H * .9 : H * .84, awake ? 1.9 : 1.45, m.look, { t, pose: awake ? 'hug' : 'lie', expr: awake ? 'scared' : 'sleep', sweat: awake }); });
       const up = t > 1.4;
       c.save(); c.globalCompositeOperation = 'lighter'; glowAt(c, W * .78, H * .7, 220, '#9dff8a', Math.min(.35, Math.max(0, t - 1) * .2)); c.restore();
-      drawChar(c, W * .78, H * .92, 2.7, d.m.look, { t: t * .5, pose: up ? (t > 3 ? 'reach' : 'idle') : 'lie', expr: up ? 'smile' : 'sleep', pale: Math.min(.9, t * .25), glassy: t > 2.2 });
+      drawChar(c, W * .78, up ? H * .92 : H * .84, up ? 2.7 : 1.6, d.m.look, { t: t * .5, pose: up ? (t > 3 ? 'reach' : 'idle') : 'lie', expr: up ? 'smile' : 'sleep', pale: Math.min(.9, t * .25), glassy: t > 2.2 });
       cVignette(c, W, H, .8);
     } },
   freezer: { dur: 4.6, tag: 'Câmara fria', sfx: [[0, 'freeze'], [2.4, 'giggle'], [3.4, 'freeze']],

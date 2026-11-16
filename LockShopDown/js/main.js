@@ -542,4 +542,25 @@ addEventListener('keydown', e => {
 });
 $$('.mute').forEach(x => x.classList.toggle('off', Sound.muted));
 
-(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => showTitle());
+/* cenas de demonstração para capturas de tela (só com #shot-... no endereço) */
+function shotScene(name) {
+  Sound.muted = true;
+  const res = { ok: true, stash: { comida: 12, agua: 16, remedio: 4, pilhas: 3, tabuas: 2, termometro: 1, radio: 1, marreta: 1, videogame: 1, cobertor: 1, cafe: 2 },
+    saved: [{ key: 'kelly', infected: false }, { key: 'jorge', infected: true }, { key: 'marta', infected: false }, { key: 'fabinho', infected: false }], dog: true, notes: ['memo', 'diario'], playerInfected: false, hugs: 0 };
+  if (name === 'run') {
+    App.proto = 'jo'; Scav.start('jo', () => {}); S.skipOverview = true; S.phase = 'play'; S.time = 96; S.paIdx = 5; setPA(PA[4][1]);
+    S.p.x = cOf(31); S.p.y = cOf(17); S.carried = ['radio', 'agua']; S.dirty = true; S.cam.x = clamp(S.p.x - VW / 2, 0, WW - VW); S.cam.y = clamp(S.p.y - VH / 2, 0, WH - VH);
+    const n = S.npcs.find(q => !q.hidden && q.kind === 'person'); if (n) { n.following = true; S.followers.push(n); n.x = S.p.x - 40; n.y = S.p.y + 10; }
+    [[36, 15, 'chase'], [39, 18, 'chase'], [27, 13, 'wander']].forEach(([x, y, st]) => { const c = makeCalmo(cOf(x), cOf(y), 'wander'); c.state = st; S.calmos.push(c); });
+    return;
+  }
+  App.proto = 'rafa'; Shelter.start('rafa', res);
+  G.members[2].stage = 3; G.members[1].thirst = 2; G.members[3].injured = true; G.members[4].stress = 82;
+  G.flags.evac = true; G.flags.freezer = true; G.day = 6; renderJournal();
+  if (name === 'door') { G.today.visitor = makeVisitor('wagner'); G.today.doorDone = false; G.today.visitor.cutDone = true; renderJournal(); doorModal(); onDoor('vq', { dataset: { q: 'medo' } }); }
+  if (name === 'cut') Cut.play('turn', { m: G.members[2], others: G.members.filter(m => m !== G.members[2]) }, '3h17. Seu Jorge se sentou devagar no colchão. E sorriu. Muito. Por tempo demais.');
+}
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => {
+  const m = location.hash.match(/^#shot-(\w+)/);
+  if (m) setTimeout(() => shotScene(m[1]), 50); else showTitle();
+});

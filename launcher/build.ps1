@@ -23,3 +23,10 @@ if (Test-Path $zip) { Remove-Item $zip -Force }
 Compress-Archive -Path (Join-Path $out '*') -DestinationPath $zip
 $kb = [math]::Round((Get-Item $zip).Length / 1KB)
 Write-Host "Pronto: $zip ($kb KB)"
+
+# 4. versão para navegador (itch.io e afins): index.html na raiz do ZIP
+$web = Join-Path $root 'LockShopDown-Web.zip'
+if (Test-Path $web) { Remove-Item $web -Force }
+Compress-Archive -Path (Join-Path $root 'LockShopDown\*') -DestinationPath $web
+$kbw = [math]::Round((Get-Item $web).Length / 1KB)
+Write-Host "Pronto: $web ($kbw KB)"
